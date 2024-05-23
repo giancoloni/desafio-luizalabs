@@ -1,10 +1,11 @@
 package br.com.gian.desafioluizalabs.wishlist.service.impl;
 
+import br.com.gian.desafioluizalabs.application.WishlistServiceImpl;
 import br.com.gian.desafioluizalabs.exception.WishlistDuplicatedIdException;
 import br.com.gian.desafioluizalabs.exception.WishlistLimitExceededException;
 import br.com.gian.desafioluizalabs.exception.WishlistProductNotFoundException;
-import br.com.gian.desafioluizalabs.wishlist.model.WishlistItem;
-import br.com.gian.desafioluizalabs.wishlist.repository.WishlistRepository;
+import br.com.gian.desafioluizalabs.domain.wishlist.WishlistItem;
+import br.com.gian.desafioluizalabs.infrastructure.repository.WishlistRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

@@ -1,6 +1,4 @@
-package br.com.gian.desafioluizalabs.wishlist.service;
-
-import br.com.gian.desafioluizalabs.wishlist.model.WishlistItem;
+package br.com.gian.desafioluizalabs.domain.wishlist;
 
 import java.util.List;
 
