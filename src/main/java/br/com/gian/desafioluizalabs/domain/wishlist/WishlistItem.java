@@ -1,4 +1,4 @@
-package br.com.gian.desafioluizalabs.wishlist.model;
+package br.com.gian.desafioluizalabs.domain.wishlist;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

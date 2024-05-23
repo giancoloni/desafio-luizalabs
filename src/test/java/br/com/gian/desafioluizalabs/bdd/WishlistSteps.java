@@ -1,7 +1,6 @@
 package br.com.gian.desafioluizalabs.bdd;
 
-import br.com.gian.desafioluizalabs.wishlist.model.WishlistItem;
-import br.com.gian.desafioluizalabs.exception.WishlistLimitExceededException;
+import br.com.gian.desafioluizalabs.domain.wishlist.WishlistItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

@@ -1,7 +1,8 @@
 package br.com.gian.desafioluizalabs.wishlist.controller;
 
-import br.com.gian.desafioluizalabs.wishlist.model.WishlistItem;
-import br.com.gian.desafioluizalabs.wishlist.service.WishlistService;
+import br.com.gian.desafioluizalabs.adapters.controller.WishlistController;
+import br.com.gian.desafioluizalabs.domain.wishlist.WishlistItem;
+import br.com.gian.desafioluizalabs.domain.wishlist.WishlistService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
