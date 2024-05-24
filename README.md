@@ -48,7 +48,7 @@ Antes de executar a aplicação, é necessário configurar o MongoDB. Utilize Do
 2. **Configure a aplicação para se conectar ao MongoDB** ajustando o arquivo `application.properties` na pasta `src/main/resources`:
 
     ```properties
-    spring.data.mongodb.uri=mongodb://admin:admin@localhost:27017/desafio-luizalabs?authSource=admin
+    spring.data.mongodb.uri=${SPRING_DATA_MONGODB_URI}
     spring.jpa.hibernate.ddl-auto=update
     server.port=8080
     ```
@@ -58,7 +58,7 @@ Antes de executar a aplicação, é necessário configurar o MongoDB. Utilize Do
 Para iniciar a aplicação, execute o seguinte comando:
 
 ```bash
-mvn spring-boot:run
+docker-compose up --build
 ```
 
 ## Testando a aplicação
