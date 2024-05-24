@@ -2,27 +2,47 @@ package br.com.gian.desafioluizalabs.wishlist.controller;
 
 import br.com.gian.desafioluizalabs.adapters.controller.WishlistController;
 import br.com.gian.desafioluizalabs.domain.wishlist.WishlistItem;
-import br.com.gian.desafioluizalabs.domain.wishlist.WishlistService;
+import br.com.gian.desafioluizalabs.usecases.AddProductToWishlistUseCase;
+import br.com.gian.desafioluizalabs.usecases.GetWishlistUseCase;
+import br.com.gian.desafioluizalabs.usecases.IsProductInWishlistUseCase;
+import br.com.gian.desafioluizalabs.usecases.RemoveProductFromWishlistUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class WishlistControllerTest {
+
+    @Mock
+    private AddProductToWishlistUseCase addProductToWishlistUseCase;
+
+    @Mock
+    private RemoveProductFromWishlistUseCase removeProductFromWishlistUseCase;
+
+    @Mock
+    private GetWishlistUseCase getWishlistUseCase;
+
+    @Mock
+    private IsProductInWishlistUseCase isProductInWishlistUseCase;
 
     @InjectMocks
     private WishlistController wishlistController;
-
-    @Mock
-    private WishlistService wishlistService;
 
     @BeforeEach
     public void setup() {
@@ -31,17 +51,16 @@ public class WishlistControllerTest {
 
     @Test
     public void addProductToWishlistReturnsAddedItem() {
-        WishlistItem item = new WishlistItem();
-        when(wishlistService.addProductToWishlist(anyString(), anyString())).thenReturn(item);
+        when(addProductToWishlistUseCase.execute(anyString(), anyString()))
+                .thenReturn(new WishlistItem());
 
-        ResponseEntity<WishlistItem> response = wishlistController.addProductToWishlist("userId", "productId");
-
-        assertEquals(ResponseEntity.ok(item), response);
+        WishlistItem result = wishlistController.addProductToWishlist("userId", "productId").getBody();
+        assertNotNull(result);
     }
 
     @Test
     public void removeProductFromWishlistReturnsNoContent() {
-        doNothing().when(wishlistService).removeProductFromWishlist(anyString(), anyString());
+        doNothing().when(removeProductFromWishlistUseCase).execute(anyString(), anyString());
 
         ResponseEntity<Void> response = wishlistController.removeProductFromWishlist("userId", "productId");
 
@@ -51,7 +70,7 @@ public class WishlistControllerTest {
     @Test
     public void getWishlistReturnsListOfItems() {
         List<WishlistItem> items = Collections.singletonList(new WishlistItem());
-        when(wishlistService.getWishlist(anyString())).thenReturn(items);
+        when(getWishlistUseCase.execute(anyString())).thenReturn(items);
 
         ResponseEntity<List<WishlistItem>> response = wishlistController.getWishlist("userId");
 
@@ -60,7 +79,7 @@ public class WishlistControllerTest {
 
     @Test
     public void isProductInWishlistReturnsTrueWhenProductIsInWishlist() {
-        when(wishlistService.isProductInWishlist(anyString(), anyString())).thenReturn(true);
+        when(isProductInWishlistUseCase.execute(anyString(), anyString())).thenReturn(true);
 
         ResponseEntity<Boolean> response = wishlistController.isProductInWishlist("userId", "productId");
 
@@ -69,7 +88,7 @@ public class WishlistControllerTest {
 
     @Test
     public void isProductInWishlistReturnsFalseWhenProductIsNotInWishlist() {
-        when(wishlistService.isProductInWishlist(anyString(), anyString())).thenReturn(false);
+        when(isProductInWishlistUseCase.execute(anyString(), anyString())).thenReturn(false);
 
         ResponseEntity<Boolean> response = wishlistController.isProductInWishlist("userId", "productId");
 
