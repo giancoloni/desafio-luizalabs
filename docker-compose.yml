@@ -1,15 +1,6 @@
 version: '3.8'
 
 services:
-#  wishlist-service:
-#    build: .
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - mongodb
-#    environment:
-#      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wishlist
-
   mongodb:
     image: mongo:4.4
     container_name: mongodb
@@ -19,6 +10,16 @@ services:
       - mongo-data:/data/db
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wishlist
+
+  app:
+    build: .
+    depends_on:
+      - mongodb
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:admin@mongodb:27017/desafio-luizalabs?authSource=admin
+    ports:
+      - "8080:8080"
+    command: [ "mvn", "spring-boot:run" ]
 
 volumes:
   mongo-data:
