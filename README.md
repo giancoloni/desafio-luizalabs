@@ -8,9 +8,7 @@ Este projeto é uma solução para o desafio proposto pela Luizalabs. Ele tem co
 - [Instalação](#instalação)
 - [Configuração](#configuração)
 - [Uso](#uso)
-- [Testes](#testes)
-- [Contribuição](#contribuição)
-- [Licença](#licença)
+- [Testando a Aplicação](#testando-a-aplicação)
 
 ## Pré-requisitos
 
